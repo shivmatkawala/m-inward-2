@@ -1,0 +1,42 @@
+<div class="batches-container container mt-4">
+  <div class="form-container card p-4">
+    <h2 class="mb-3" style="text-align: center;color: blue;">Batch's Form</h2>
+    <h5 class="mb-3">REMAINING QTY:- <label style="color: red;">{{remainingMaterialQuantity}}</label></h5>
+    <div class="form-group">
+      <div class="mb-3" style="display: flex;">
+        <label for="batchNumber" class="form-label">Batch Number</label>
+        <input type="text" id="batchNumber" class="form-control" [(ngModel)]="batchData.batchNumber" name="batchNumber" [disabled]="isFormDisabled()">
+      </div>
+
+      <div class="mb-3" style="display: flex;">
+        <label for="quantity" class="form-label">Batch Quantity</label>
+        <input type="number" id="quantity" class="form-control" [(ngModel)]="batchData.batchQuantity" name="quantity" [disabled]="isFormDisabled()" placeholder="0" style="font-weight: 600; font-family: 'Courier New', Courier, monospace; font-size: larger;">
+      </div>
+
+      <button type="submit" [disabled]="isFormDisabled()" (click)="onSubmit()" class="btn btn-sm btn-success mb-3" style="width: 381px;">Submit</button>
+    </div>
+  </div>
+
+  <div class="table-container card p-4">
+    <h3 class="" style="text-align: center; color: blue;">Created Batches</h3>
+    <table class="table table-bordered table-primary" style="border-radius: 0.5rem;">
+      <thead class="table-light">
+        <tr class="table-primary">
+          <th style="text-align: center;">Batch</th>
+          <th style="text-align: center;">Quantity</th>
+          <th style="text-align: center;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let batch of batches; let i = index">
+          <td>{{ batch.batchNumber }}</td>
+          <td>{{ batch.batchQuantity }}</td>
+          <td>
+            <button (click)="deleteBatch(i)" [disabled]="disableButtons" class="btn btn-sm btn-danger">Delete</button>
+            <button (click)="createPacks(batch)" [disabled]="disableButtons" class="btn btn-sm btn-success">Manage Packs</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

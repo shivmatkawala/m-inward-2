@@ -1,0 +1,17 @@
+<div *ngIf="materialData" class="container mt-4 card p-4" style="text-align: center;">
+  <div class="">
+    <h2 class=" mb-3" style="text-align: center;  color: blue; text-decoration: underline;">~: Summary :~</h2>
+    <br>
+    
+    <div class="summary-item">Material: <h4 style="text-decoration: solid; color: blue;">{{ materialData.materialName }}</h4></div>
+  
+    <div class="summary-item">Supplier: <h4 style="text-decoration: solid; color: blue;">{{ materialData.supplierName }}</h4></div>
+  
+    <div class="summary-item">Quantity: <h4 style="text-decoration: solid; color: blue;">{{ materialData.materialQuantity }}</h4></div>
+  
+    <div class="summary-item">Total Batches: <h4 style="text-decoration: solid; color: blue;">{{ totalBatches }}</h4></div>
+  
+    <div class="summary-item">Total Packs: <h4 style="text-decoration: solid;color: blue;">{{ totalPacks }}</h4></div>
+    <br>
+  </div>
+</div>

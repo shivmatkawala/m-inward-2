@@ -1,0 +1,47 @@
+<div class="container mt-4 ">
+  <div class="form-container card p-4">
+    <h2 class="mb-3" style="text-align: center; color: blue;">Pack's Form</h2>
+    <h5 class="mb-3">SELECTED BATCH:- <label style="text-decoration: solid; color: red;">{{ selectedBatch?.batchNumber }}</label></h5>
+    <h5 class="mb-3">REMAINING QTY:- <label style="text-decoration: solid; color: red; ">{{ remainingQuantity }}</label></h5>
+    <div class="mb-3" style="display: flex;">
+      <label for="numberOfPacks" class="form-label">How many packs would you like to add?</label>
+      <input type="number" class="form-control" [(ngModel)]="numberOfPacks" id="numberOfPacks" [disabled]="!isPackFormEnabled"
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="How many packs would you like to add?"/>
+    </div>
+    <button class="btn btn-sm btn-success mb-3" (click)="addPacks()" [disabled]="!isPackFormEnabled || remainingQuantity <= 0">Add</button>
+  </div>
+
+  <div class="table-responsive card p-4 table-primary">
+    <h3 class="" style="text-align: center; color: blue;">Created Packs</h3>
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr class="table-primary">
+          <th>Index</th>
+          <th>Gross</th>
+          <th>Tare</th>
+          <th>Net</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pack of packFormData; let i = index">
+          <td>{{ pack.index }}</td>
+          <td>
+            <input type="number" class="form-control" [(ngModel)]="pack.grossWeight" (ngModelChange)="calculateNetWeight(pack)" [disabled]="!pack.isEditing || !isPackFormEnabled" />
+          </td>
+          <td>
+            <input type="number" class="form-control" [(ngModel)]="pack.tareWeight" (ngModelChange)="calculateNetWeight(pack)" [disabled]="!pack.isEditing || !isPackFormEnabled" />
+          </td>
+          <td>{{ pack.netWeight }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="pack.isEditing ? savePack(pack) : editPack(pack)">{{ pack.isEditing ? 'Save' : 'Edit' }}</button>
+            <button class="btn btn-sm btn-danger" (click)="deletePack(i)" [disabled]="!isPackFormEnabled">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-sm btn-success" (click)="submitPacks()" [disabled]="!isPackFormEnabled">Submit</button>
+  </div>
+
+  
+</div>
